@@ -267,7 +267,7 @@ python scripts/make_figures.py
 Add `--push-to-hub --hub-repo-id <you>/<name>` to `build_dataset.py`,
 `train.py` or `export.py` to publish.
 
-## Gradio Space
+## Gradio app
 
 ```bash
 python app.py
@@ -276,6 +276,17 @@ python app.py
 Paste a message body, choose the audience, and each passage is highlighted by type
 with the source and alternative forms. The **textlint result is shown side by
 side**, sorted into *only Deference*, *only textlint* and *both*.
+
+To publish it as a Hugging Face Space:
+
+```bash
+python scripts/publish_space.py --repo-id <you>/deference
+```
+
+The Space pulls the weights from the model repo rather than bundling them, and
+installs the textlint baseline on first start so the side-by-side view is live.
+Note that **hosting a Gradio Space on free cpu-basic requires Hugging Face PRO**
+(static Spaces are free); without it the script reports the 402 and stops.
 
 ## Tests
 

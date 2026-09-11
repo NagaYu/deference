@@ -21,6 +21,7 @@ side by side so you can see what a surface-pattern linter does and does not reac
 from __future__ import annotations
 
 import os
+import shutil
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -55,6 +56,53 @@ _LOCAL_MODEL = Path("checkpoints/deference-base")
 _HUB_MODEL = os.environ.get("DEFERENCE_MODEL", "NagaYu/deference-keigo")
 MODEL_DIR = _LOCAL_MODEL if _LOCAL_MODEL.exists() else _HUB_MODEL
 _HAS_MODEL = True
+
+
+def _bootstrap_textlint() -> None:
+    """textlint を用意する（1度だけ）。
+
+    比較対象が動かないと、このデモの中心である「並置比較」が見せられない。
+    Space では packages.txt で Node を入れたうえで、ここで npm install する。
+    Node が無い環境では黙って諦め、UI 側が「利用できません」と伝える。
+
+    実証する主張: 「向きの誤り検出」。textlint が何を拾い、何を拾わないかを
+    その場で見せられることが、この主張のいちばん率直な示し方である。
+    """
+    import subprocess
+
+    workdir = Path(__file__).resolve().parent / ".baseline_textlint"
+    if (workdir / "node_modules").exists():
+        return
+    if shutil.which("npm") is None:
+        print("npm not found; the textlint comparison will be disabled.")
+        return
+    workdir.mkdir(exist_ok=True)
+    if not (workdir / "package.json").exists():
+        (workdir / "package.json").write_text(
+            '{"name":"deference-textlint-baseline","private":true,"version":"0.0.0"}',
+            encoding="utf-8",
+        )
+    packages = [
+        "textlint",
+        "textlint-rule-preset-ja-technical-writing",
+        "textlint-rule-preset-jtf-style",
+        "textlint-rule-preset-ja-spacing",
+        "textlint-rule-preset-japanese",
+    ]
+    try:
+        proc = subprocess.run(
+            ["npm", "install", "--no-audit", "--no-fund", *packages],
+            cwd=str(workdir), capture_output=True, text=True, timeout=600,
+        )
+        if proc.returncode != 0:
+            print("npm install failed:", proc.stderr[-400:])
+        else:
+            print("textlint baseline installed.")
+    except Exception as exc:  # noqa: BLE001
+        print("could not install textlint:", exc)
+
+
+_bootstrap_textlint()
 
 _engines: Dict[str, Deference] = {}
 _textlint = TextlintBaseline()
