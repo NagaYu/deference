@@ -1,0 +1,13 @@
+{
+  "name": "deference-textlint-baseline",
+  "private": true,
+  "version": "0.0.0",
+  "description": "textlint baseline (condition A) for Deference benchmarks",
+  "dependencies": {
+    "textlint": "^15.8.0",
+    "textlint-rule-preset-ja-spacing": "^3.0.3",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2",
+    "textlint-rule-preset-japanese": "^10.0.4",
+    "textlint-rule-preset-jtf-style": "^3.0.3"
+  }
+}

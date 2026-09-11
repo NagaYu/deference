@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+
+# Generated corpus — published as a Hugging Face dataset instead
+data/
+
+# Trained weights and exports — published as a Hugging Face model instead
+checkpoints/
+exports/
+*.onnx
+*.onnx.data
+*.gguf
+*.safetensors
+
+# textlint baseline is installed by `npm install` (see README)
+.baseline_textlint/node_modules/
+.baseline_textlint/package-lock.json
+.baseline_textlint/.textlintrc.json
+
+# Local caches
+.cache/
+outputs/
+.source_check/

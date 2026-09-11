@@ -1,0 +1,6 @@
+# Hugging Face Space 用の最小構成
+gradio>=4.44,<7
+torch>=2.1,<3
+transformers>=4.40,<6
+sentencepiece>=0.2
+numpy>=1.24,<3

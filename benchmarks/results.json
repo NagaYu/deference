@@ -1,0 +1,631 @@
+{
+  "meta": {
+    "n_error_docs": 559,
+    "n_correct_docs": 152,
+    "n_variation_docs": 53,
+    "data_dir": "data/hf",
+    "limit": 300,
+    "D_engine": "hybrid"
+  },
+  "conditions": {
+    "A": {
+      "condition": "A",
+      "label": "(A) textlint",
+      "axis1_detection_by_type": {
+        "bad_keigo_link": {
+          "n": 17,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "不適切な敬語連結"
+        },
+        "direction_swap": {
+          "n": 208,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "尊敬語と謙譲語Ⅰの取り違え"
+        },
+        "double_keigo": {
+          "n": 41,
+          "location_recall": 0.14634146341463414,
+          "type_recall": 0.0,
+          "is_direction": false,
+          "ja": "二重敬語"
+        },
+        "go_sareru": {
+          "n": 39,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": false,
+          "ja": "「ご利用される」型"
+        },
+        "ogo_dekiru": {
+          "n": 148,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "「ご乗車できません」型"
+        },
+        "sa_insertion": {
+          "n": 12,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": false,
+          "ja": "さ入れ言葉"
+        },
+        "self_sonkeigo": {
+          "n": 72,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "自分側に尊敬語"
+        },
+        "uchi_sonkeigo": {
+          "n": 22,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "身内に尊敬語"
+        }
+      },
+      "axis1_overall": {
+        "n": 559,
+        "location_recall": 0.01073345259391771,
+        "type_recall": 0.0
+      },
+      "axis1_direction_only": {
+        "n": 467,
+        "location_recall": 0.0,
+        "type_recall": 0.0
+      },
+      "axis2_variation": {
+        "n": 53,
+        "not_flagged": 50,
+        "no_overflag_rate": 0.9433962264150944,
+        "flagged_examples": [
+          {
+            "text": "温かいうちにお召し上がりになるとよろしいかと存じます。",
+            "focus": "お召し上がりになる",
+            "flagged_as": [
+              "none"
+            ]
+          },
+          {
+            "text": "こちらのページから資料が見れます。",
+            "focus": "見れます",
+            "flagged_as": [
+              "none"
+            ]
+          },
+          {
+            "text": "会場では軽食も食べれます。",
+            "focus": "食べれます",
+            "flagged_as": [
+              "none"
+            ]
+          }
+        ]
+      },
+      "axis2_false_positive": {
+        "n_docs": 152,
+        "docs_with_fp": 17,
+        "fp_doc_rate": 0.1118421052631579,
+        "fp_count": 35
+      },
+      "axis3_suggestions": {
+        "n": 6,
+        "matched_gold": 0,
+        "rate": 0.0
+      },
+      "axis4_confusion": {
+        "self_sonkeigo": {
+          "__missed__": 72
+        },
+        "uchi_sonkeigo": {
+          "__missed__": 22
+        },
+        "sa_insertion": {
+          "__missed__": 12
+        },
+        "direction_swap": {
+          "__missed__": 208
+        },
+        "ogo_dekiru": {
+          "__missed__": 148
+        },
+        "double_keigo": {
+          "__missed__": 35,
+          "none": 6
+        },
+        "go_sareru": {
+          "__missed__": 39
+        },
+        "bad_keigo_link": {
+          "__missed__": 17
+        }
+      },
+      "axis4_type_accuracy": 0.0,
+      "axis5_latency": {
+        "median_ms": 2.25849522898011,
+        "p95_ms": 5.6531732434211195,
+        "mean_ms": 2.984221049226289,
+        "n": 711
+      }
+    },
+    "B": {
+      "condition": "B",
+      "label": "(B) 表層規則群",
+      "axis1_detection_by_type": {
+        "bad_keigo_link": {
+          "n": 17,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "不適切な敬語連結"
+        },
+        "direction_swap": {
+          "n": 208,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "尊敬語と謙譲語Ⅰの取り違え"
+        },
+        "double_keigo": {
+          "n": 41,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "二重敬語"
+        },
+        "go_sareru": {
+          "n": 39,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "「ご利用される」型"
+        },
+        "ogo_dekiru": {
+          "n": 148,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": true,
+          "ja": "「ご乗車できません」型"
+        },
+        "sa_insertion": {
+          "n": 12,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "さ入れ言葉"
+        },
+        "self_sonkeigo": {
+          "n": 72,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "自分側に尊敬語"
+        },
+        "uchi_sonkeigo": {
+          "n": 22,
+          "location_recall": 0.0,
+          "type_recall": 0.0,
+          "is_direction": true,
+          "ja": "身内に尊敬語"
+        }
+      },
+      "axis1_overall": {
+        "n": 559,
+        "location_recall": 0.4293381037567084,
+        "type_recall": 0.4293381037567084
+      },
+      "axis1_direction_only": {
+        "n": 467,
+        "location_recall": 0.3169164882226981,
+        "type_recall": 0.3169164882226981
+      },
+      "axis2_variation": {
+        "n": 53,
+        "not_flagged": 48,
+        "no_overflag_rate": 0.9056603773584906,
+        "flagged_examples": [
+          {
+            "text": "お送りいただいた企画書を拝見させていただきました。",
+            "focus": "拝見させていただきました",
+            "flagged_as": [
+              "double_keigo"
+            ]
+          },
+          {
+            "text": "とんでもございません、こちらこそ助かりました。",
+            "focus": "とんでもございません",
+            "flagged_as": [
+              "none"
+            ]
+          },
+          {
+            "text": "こちらのページから資料が見れます。",
+            "focus": "見れます",
+            "flagged_as": [
+              "none"
+            ]
+          },
+          {
+            "text": "会場では軽食も食べれます。",
+            "focus": "食べれます",
+            "flagged_as": [
+              "none"
+            ]
+          },
+          {
+            "text": "ご注文は以上でよろしかったでしょうか。",
+            "focus": "よろしかったでしょうか",
+            "flagged_as": [
+              "none"
+            ]
+          }
+        ]
+      },
+      "axis2_false_positive": {
+        "n_docs": 152,
+        "docs_with_fp": 0,
+        "fp_doc_rate": 0.0,
+        "fp_count": 0
+      },
+      "axis3_suggestions": {
+        "n": 240,
+        "matched_gold": 0,
+        "rate": 0.0
+      },
+      "axis4_confusion": {
+        "self_sonkeigo": {
+          "__missed__": 72
+        },
+        "uchi_sonkeigo": {
+          "__missed__": 22
+        },
+        "sa_insertion": {
+          "sa_insertion": 12
+        },
+        "direction_swap": {
+          "__missed__": 208
+        },
+        "ogo_dekiru": {
+          "ogo_dekiru": 148
+        },
+        "double_keigo": {
+          "double_keigo": 41
+        },
+        "go_sareru": {
+          "go_sareru": 39
+        },
+        "bad_keigo_link": {
+          "__missed__": 17
+        }
+      },
+      "axis4_type_accuracy": 1.0,
+      "axis5_latency": {
+        "median_ms": 0.008707999768375885,
+        "p95_ms": 0.01475000044592889,
+        "mean_ms": 0.010616841068753807,
+        "n": 711
+      }
+    },
+    "D": {
+      "condition": "D",
+      "label": "(D) Deference（量子化前）",
+      "axis1_detection_by_type": {
+        "bad_keigo_link": {
+          "n": 17,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": true,
+          "ja": "不適切な敬語連結"
+        },
+        "direction_swap": {
+          "n": 208,
+          "location_recall": 0.9711538461538461,
+          "type_recall": 0.9711538461538461,
+          "is_direction": true,
+          "ja": "尊敬語と謙譲語Ⅰの取り違え"
+        },
+        "double_keigo": {
+          "n": 41,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "二重敬語"
+        },
+        "go_sareru": {
+          "n": 39,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "「ご利用される」型"
+        },
+        "ogo_dekiru": {
+          "n": 148,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": true,
+          "ja": "「ご乗車できません」型"
+        },
+        "sa_insertion": {
+          "n": 12,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "さ入れ言葉"
+        },
+        "self_sonkeigo": {
+          "n": 72,
+          "location_recall": 0.9722222222222222,
+          "type_recall": 0.9722222222222222,
+          "is_direction": true,
+          "ja": "自分側に尊敬語"
+        },
+        "uchi_sonkeigo": {
+          "n": 22,
+          "location_recall": 0.9545454545454546,
+          "type_recall": 0.8181818181818182,
+          "is_direction": true,
+          "ja": "身内に尊敬語"
+        }
+      },
+      "axis1_overall": {
+        "n": 559,
+        "location_recall": 0.9838998211091234,
+        "type_recall": 0.9785330948121646
+      },
+      "axis1_direction_only": {
+        "n": 467,
+        "location_recall": 0.9807280513918629,
+        "type_recall": 0.974304068522484
+      },
+      "axis2_variation": {
+        "n": 53,
+        "not_flagged": 53,
+        "no_overflag_rate": 1.0,
+        "flagged_examples": []
+      },
+      "axis2_false_positive": {
+        "n_docs": 152,
+        "docs_with_fp": 3,
+        "fp_doc_rate": 0.019736842105263157,
+        "fp_count": 3
+      },
+      "axis3_suggestions": {
+        "n": 550,
+        "matched_gold": 332,
+        "rate": 0.6036363636363636
+      },
+      "axis4_confusion": {
+        "self_sonkeigo": {
+          "self_sonkeigo": 70,
+          "__missed__": 2
+        },
+        "uchi_sonkeigo": {
+          "uchi_sonkeigo": 18,
+          "self_sonkeigo": 3,
+          "__missed__": 1
+        },
+        "sa_insertion": {
+          "sa_insertion": 12
+        },
+        "direction_swap": {
+          "direction_swap": 202,
+          "__missed__": 6
+        },
+        "ogo_dekiru": {
+          "ogo_dekiru": 148
+        },
+        "double_keigo": {
+          "double_keigo": 41
+        },
+        "go_sareru": {
+          "go_sareru": 39
+        },
+        "bad_keigo_link": {
+          "bad_keigo_link": 17
+        }
+      },
+      "axis4_type_accuracy": 0.9945454545454545,
+      "axis5_latency": {
+        "median_ms": 31.333207999978185,
+        "p95_ms": 34.14570899985847,
+        "mean_ms": 34.1584372461399,
+        "n": 711
+      }
+    },
+    "E": {
+      "condition": "E",
+      "label": "(E) Deference（量子化後）",
+      "axis1_detection_by_type": {
+        "bad_keigo_link": {
+          "n": 17,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": true,
+          "ja": "不適切な敬語連結"
+        },
+        "direction_swap": {
+          "n": 208,
+          "location_recall": 0.9711538461538461,
+          "type_recall": 0.9711538461538461,
+          "is_direction": true,
+          "ja": "尊敬語と謙譲語Ⅰの取り違え"
+        },
+        "double_keigo": {
+          "n": 41,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "二重敬語"
+        },
+        "go_sareru": {
+          "n": 39,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "「ご利用される」型"
+        },
+        "ogo_dekiru": {
+          "n": 148,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": true,
+          "ja": "「ご乗車できません」型"
+        },
+        "sa_insertion": {
+          "n": 12,
+          "location_recall": 1.0,
+          "type_recall": 1.0,
+          "is_direction": false,
+          "ja": "さ入れ言葉"
+        },
+        "self_sonkeigo": {
+          "n": 72,
+          "location_recall": 0.9722222222222222,
+          "type_recall": 0.9722222222222222,
+          "is_direction": true,
+          "ja": "自分側に尊敬語"
+        },
+        "uchi_sonkeigo": {
+          "n": 22,
+          "location_recall": 0.9545454545454546,
+          "type_recall": 0.8636363636363636,
+          "is_direction": true,
+          "ja": "身内に尊敬語"
+        }
+      },
+      "axis1_overall": {
+        "n": 559,
+        "location_recall": 0.9838998211091234,
+        "type_recall": 0.9803220035778175
+      },
+      "axis1_direction_only": {
+        "n": 467,
+        "location_recall": 0.9807280513918629,
+        "type_recall": 0.9764453961456103
+      },
+      "axis2_variation": {
+        "n": 53,
+        "not_flagged": 53,
+        "no_overflag_rate": 1.0,
+        "flagged_examples": []
+      },
+      "axis2_false_positive": {
+        "n_docs": 152,
+        "docs_with_fp": 3,
+        "fp_doc_rate": 0.019736842105263157,
+        "fp_count": 3
+      },
+      "axis3_suggestions": {
+        "n": 550,
+        "matched_gold": 331,
+        "rate": 0.6018181818181818
+      },
+      "axis4_confusion": {
+        "self_sonkeigo": {
+          "self_sonkeigo": 70,
+          "__missed__": 2
+        },
+        "uchi_sonkeigo": {
+          "uchi_sonkeigo": 19,
+          "self_sonkeigo": 2,
+          "__missed__": 1
+        },
+        "sa_insertion": {
+          "sa_insertion": 12
+        },
+        "direction_swap": {
+          "direction_swap": 202,
+          "__missed__": 6
+        },
+        "ogo_dekiru": {
+          "ogo_dekiru": 148
+        },
+        "double_keigo": {
+          "double_keigo": 41
+        },
+        "go_sareru": {
+          "go_sareru": 39
+        },
+        "bad_keigo_link": {
+          "bad_keigo_link": 17
+        }
+      },
+      "axis4_type_accuracy": 0.9963636363636363,
+      "axis5_latency": {
+        "median_ms": 25.554958000157058,
+        "p95_ms": 29.65995800013843,
+        "mean_ms": 26.726234994372074,
+        "n": 711
+      }
+    }
+  },
+  "skipped": {
+    "C": "ANTHROPIC_API_KEY が設定されておらず、キャッシュもありません。この条件は測定不可として扱います。"
+  },
+  "curve_D": [
+    {
+      "threshold": 0.05,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.1,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.2,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.3,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.4,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.5,
+      "detection_rate": 0.985,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.6,
+      "detection_rate": 0.98,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.7,
+      "detection_rate": 0.98,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.8,
+      "detection_rate": 0.98,
+      "overflag_rate": 0.014634146341463415
+    },
+    {
+      "threshold": 0.9,
+      "detection_rate": 0.965,
+      "overflag_rate": 0.00975609756097561
+    },
+    {
+      "threshold": 0.95,
+      "detection_rate": 0.95,
+      "overflag_rate": 0.004878048780487805
+    }
+  ],
+  "axis6_industry": {
+    "measured": false,
+    "reason": "業種別アダプタが学習されていないため測定不可。scripts/train.py --industry-adapter <業種> で学習してください。"
+  }
+}

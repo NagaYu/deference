@@ -1,0 +1,30 @@
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+   Full text: https://www.apache.org/licenses/LICENSE-2.0.txt
+
+---------------------------------------------------------------------------
+規範データについて
+
+deference/norms.py に含まれる「敬語の指針」からの引用は、
+文化審議会答申「敬語の指針」（文化庁）を加工して作成したものです。
+https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/keigo_tosin.pdf
+
+文化庁ウェブサイトのコンテンツは「文部科学省ウェブサイト利用規約」
+（https://www.mext.go.jp/b_menu/1351168.htm）に従います。同規約は
+「公共データ利用規約（第1.0版）」に準拠し、CC BY と互換性があるとされ、
+出典を記載すれば複製・公衆送信・翻訳・変形等の翻案等を自由に行えます
+（商用利用も可）。編集・加工した場合は、その旨を明記することが求められています。
