@@ -26,3 +26,6 @@ exports/
 .cache/
 outputs/
 .source_check/
+
+# Static Space build output
+build/

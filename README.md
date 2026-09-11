@@ -277,16 +277,23 @@ Paste a message body, choose the audience, and each passage is highlighted by ty
 with the source and alternative forms. The **textlint result is shown side by
 side**, sorted into *only Deference*, *only textlint* and *both*.
 
-To publish it as a Hugging Face Space:
+### Publishing it
+
+**Hosting a Gradio Space on free cpu-basic requires Hugging Face PRO**; static
+Spaces are free. Two publishers are included.
 
 ```bash
+# Interactive Gradio Space (needs PRO). Pulls the weights from the model repo
+# rather than bundling them, and installs textlint on first start.
 python scripts/publish_space.py --repo-id <you>/deference
+
+# Static Space (free). Runs the real model over a set of examples ahead of time
+# and embeds the output, so the audience flip is still there to click through.
+python scripts/build_static_space.py --out build/space-static --push --repo-id <you>/deference
 ```
 
-The Space pulls the weights from the model repo rather than bundling them, and
-installs the textlint baseline on first start so the side-by-side view is live.
-Note that **hosting a Gradio Space on free cpu-basic requires Hugging Face PRO**
-(static Spaces are free); without it the script reports the 402 and stops.
+The published Space at <https://huggingface.co/spaces/NagaYu/deference> is the
+static one.
 
 ## Tests
 

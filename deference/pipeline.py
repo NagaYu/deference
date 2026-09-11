@@ -225,11 +225,46 @@ class Deference:
         )
 
     def _merge(self, findings: Sequence[Finding]) -> List[Finding]:
-        """同じ位置に複数の検出器が当たったら、確信度の高い方を残す。"""
+        """同じ位置に複数の検出器が当たったら、確信度の高い方を残す。
+
+        ただし**揺れの判定だけは規範エンジンの結論を優先する**。
+        揺れかどうかは文脈に依存する方針判断（たとえば身内敬語は、宛先が社内なら
+        指針【26】により揺れ）であって、モデルはそれを学んでいない。
+        確信度だけで勝たせると、社内宛でも身内敬語を指摘してしまい、
+        「同じ本文でも宛先で結果が変わる」という中心的な振る舞いが壊れる。
+
+        実証する主張: 「過剰指摘の少なさ」と「向きの誤り検出」。
+        """
         out: List[Finding] = []
         for f in sorted(findings, key=lambda x: -x.confidence):
             if any(f.span.overlaps(o.span) for o in out):
                 continue
+            # 同じ位置に揺れ判定があれば、それを引き継ぐ
+            if any(
+                o.verdict is Verdict.VARIATION and f.span.overlaps(o.span)
+                for o in findings
+            ):
+                f = Finding(
+                    span=f.span,
+                    error_type=f.error_type,
+                    verdict=Verdict.VARIATION,
+                    confidence=f.confidence,
+                    suggestions=f.suggestions,
+                    citation=f.citation,
+                    message=f.message,
+                    detector=f.detector,
+                    meta={
+                        **f.meta,
+                        **{
+                            k: v
+                            for o in findings
+                            if o.verdict is Verdict.VARIATION
+                            and f.span.overlaps(o.span)
+                            for k, v in o.meta.items()
+                            if k.startswith("variation_")
+                        },
+                    },
+                )
             out.append(f)
         return out
 
