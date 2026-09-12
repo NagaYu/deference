@@ -86,7 +86,15 @@ def _record(
     variation_reason: str = "",
     function: str = "",
     kind: str = "sentence",
+    focus_start: int = -1,
+    focus_end: int = -1,
+    focus_text: str = "",
+    acceptability: str = "",
+    related_error_type: str = "",
 ) -> Dict[str, Any]:
+    # すべての split で同じ列・同じ型にする。datasets は JSONL をファイルごとに
+    # 型推論するので、列が欠けていたり空リストだけの列があると
+    # load_dataset がキャストに失敗する。
     return {
         "id": rid,
         "text": text,
@@ -117,7 +125,11 @@ def _record(
             ensure_ascii=False,
         ),
         "n_errors": len(errors),
-        "error_types": sorted({e.error_type.value for e in errors}),
+        # リストのまま出すと、全行が空の split で list<null> と推論されて
+        # 他の split と型が合わなくなる。他のリスト列と同じく JSON 文字列にする。
+        "error_types": json.dumps(
+            sorted({e.error_type.value for e in errors}), ensure_ascii=False
+        ),
         "has_direction_error": any(e.error_type.is_direction_error for e in errors),
         "char_labels": json.dumps(
             _bio_labels(text, errors, ErrorSpanClassifier.label_list()),
@@ -128,6 +140,11 @@ def _record(
         "function": function,
         "industry": industry,
         "kind": kind,
+        "focus_start": focus_start,
+        "focus_end": focus_end,
+        "focus_text": focus_text,
+        "acceptability": acceptability,
+        "related_error_type": related_error_type,
         "split": split,
     }
 
@@ -289,14 +306,12 @@ def build(
                 is_variation=True,
                 variation_reason=c.reason,
                 kind="variation",
+                focus_start=c.focus.start,
+                focus_end=c.focus.end,
+                focus_text=c.focus.text,
+                acceptability=c.acceptability,
+                related_error_type=c.related_error_type.value,
             )
-            | {
-                "focus_start": c.focus.start,
-                "focus_end": c.focus.end,
-                "focus_text": c.focus.text,
-                "acceptability": c.acceptability,
-                "related_error_type": c.related_error_type.value,
-            }
         )
     splits["variation"] = variation
 
@@ -334,7 +349,7 @@ def dataset_card(splits: Dict[str, List[Dict[str, Any]]], repo_id: str) -> str:
     type_counts: Counter = Counter()
     for rows in splits.values():
         for r in rows:
-            for t in r["error_types"]:
+            for t in json.loads(r["error_types"]):
                 type_counts[t] += 1
 
     rows = "\n".join(
@@ -453,7 +468,11 @@ the guidelines say so themselves:
 | `audience` | `external` / `internal` / `public` — **the same text can be judged differently** |
 | `writer_org` / `recipient_org` | organisation names for each side |
 | `persons` | people named in the text and their standpoint (JSON) |
-| `errors` | list of `start` / `end` / `type` / `original` / `gold` / `citation_key` |
+| `errors` | JSON: list of `start` / `end` / `type` / `original` / `gold` / `citation_key` |
+| `error_types` | JSON: the distinct error types in the row |
+| `focus_start` / `focus_end` / `focus_text` | the span in focus for `variation` rows (`-1` / `""` elsewhere) |
+| `acceptability` | `established` / `split` / `shifting` for `variation` rows |
+| `related_error_type` | the error type a detector might raise on a `variation` row |
 | `char_labels` | character-level BIO tags (JSON array) |
 | `has_direction_error` | whether the row contains an error in the direction of deference |
 | `is_variation` | whether the row is a variation case |
